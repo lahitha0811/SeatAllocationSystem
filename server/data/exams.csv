@@ -1,0 +1,21 @@
+subjectCode,subjectName,branch,year,examDate,session
+SUB001,DBMS,MECH,2,2026-06-02,AN
+SUB002,Operating Systems,MECH,1,2026-06-03,FN
+SUB003,Computer Networks,EEE,4,2026-06-04,AN
+SUB004,Artificial Intelligence,ECE,3,2026-06-05,FN
+SUB005,Machine Learning,EEE,3,2026-06-06,AN
+SUB006,Compiler Design,EEE,1,2026-06-07,FN
+SUB007,Signals,ECE,2,2026-06-08,AN
+SUB008,VLSI,ECE,1,2026-06-09,FN
+SUB009,Thermodynamics,ECE,2,2026-06-10,AN
+SUB010,Fluid Mechanics,MECH,4,2026-06-01,FN
+SUB011,Structural Analysis,EEE,3,2026-06-02,AN
+SUB012,Engineering Maths,ECE,3,2026-06-03,FN
+SUB013,Physics,ECE,1,2026-06-04,AN
+SUB014,Chemistry,MECH,4,2026-06-05,FN
+SUB015,Java Programming,CSE,1,2026-06-06,AN
+SUB016,Python Programming,MECH,3,2026-06-07,FN
+SUB017,Data Structures,ECE,4,2026-06-08,AN
+SUB018,Theory of Computation,EEE,1,2026-06-09,FN
+SUB019,Cloud Computing,MECH,1,2026-06-10,AN
+SUB020,Software Engineering,CIVIL,4,2026-06-01,FN

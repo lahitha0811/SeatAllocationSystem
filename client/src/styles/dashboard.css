@@ -1,0 +1,420 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: #f4f6f9;
+  color: #111827;
+  overflow-x: hidden;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+.stat-card h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.stat-card h3 {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,0.08);
+}
+
+
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.sidebar {
+  width: 240px;
+  background: #111827;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+.room-select {
+  min-width: 180px;
+  height: 50px;
+  padding: 0 12px;
+  font-size: 16px;
+  background: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+}
+
+.room-select option {
+  background: white;
+  color: #111827;
+}
+
+.room-form select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #111827;
+}
+
+.room-form select option {
+  background: white;
+  color: #111827;
+}
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 240px;
+  min-height: 100vh;
+
+  width: calc(100% - 240px);
+
+  background: #f4f6f9;
+  color: #111827;
+
+  overflow-x: auto;
+}
+
+.room-grid-wrapper {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+
+  overflow-x: auto;
+  max-width: 100%;
+}
+.approval-card {
+  background: white;
+  color: #111827;
+
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.allocation-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  background: white;
+  color: #111827;
+}
+
+.allocation-table th {
+  background: #2563eb;
+  color: white;
+}
+
+.allocation-table th,
+.allocation-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar {
+  height: 70px;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.stats-grid {
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.room-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-form {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 350px;
+}
+.auth-form input,
+.room-form input {
+  padding: 10px;
+}
+
+.auth-form button,
+.room-form button,
+.btn {
+  padding: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.form-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.room-form {
+  background: white;
+
+  width: 400px;
+  padding: 30px;
+
+  border-radius: 18px;
+
+  border: 1px solid #cbd5e1;
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.room-form input,
+.room-form select {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  transition: all 0.2s ease;
+}
+
+.room-form input:focus,
+.room-form select:focus {
+  outline: none;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,.15);
+}
+/* Seat Allocation Toolbar */
+
+.seat-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.seat-toolbar label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.seat-select,
+.seat-input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.seat-select:focus,
+.seat-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  color: white;
+}
+
+.action-btn.generate {
+  background: #2563eb;
+}
+
+.action-btn.excel {
+  background: #16a34a;
+}
+
+.action-btn.pdf {
+  background: #dc2626;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* ================= RESERVATIONS ================= */
+
+.reservations-page {
+  padding: 30px;
+}
+
+.page-title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.reservations-table-wrapper {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,0.08);
+}
+
+.reservations-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.reservations-table thead th {
+  background: #2563eb;
+  color: white;
+
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.reservations-table thead th:first-child {
+  border-top-left-radius: 18px;
+}
+
+.reservations-table thead th:last-child {
+  border-top-right-radius: 18px;
+}
+
+.reservations-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.reservations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reservations-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  padding: 30px !important;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
