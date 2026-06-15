@@ -25,7 +25,7 @@ function Rooms() {
             "/classrooms"
           );
 
-          console.log(res.data);
+          //console.log(res.data);
 
         setRooms(
           res.data.classrooms || []
