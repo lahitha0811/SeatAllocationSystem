@@ -19,7 +19,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://your-vercel-domain.vercel.app"
+      "https://seat-allocation-system-snowy.vercel.app/"
     ],
     credentials: true,
   })
