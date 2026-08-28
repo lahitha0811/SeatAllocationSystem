@@ -2,11 +2,7 @@ const Allocation =
   require("../../../models/Allocation");
 
 const persistAllocation =
-  async (classroomMatrices) => {
-
-    /* ---------------- CLEAR OLD ALLOCATIONS ---------------- */
-
-    await Allocation.deleteMany({});
+  async (classroomMatrices, scope) => {
 
     const allocationDocs = [];
 
@@ -45,7 +41,10 @@ const persistAllocation =
                       seat.session,
 
                     examDate:
-                      seat.examDate
+                      seat.examDate,
+
+                    allocationRunId:
+                      scope.allocationRunId
                   });
                 }
               }
@@ -55,9 +54,9 @@ const persistAllocation =
       }
     );
 
-    await Allocation.insertMany(
-      allocationDocs
-    );
+    if (allocationDocs.length) {
+      await Allocation.insertMany(allocationDocs);
+    }
 
     console.log(
       `${allocationDocs.length} allocations saved`

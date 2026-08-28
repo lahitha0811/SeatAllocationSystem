@@ -69,6 +69,13 @@ function countViolations(classrooms) {
 
               violations++;
             }
+
+            if (
+              neighbor.subjectCode ===
+              student.subjectCode
+            ) {
+              violations++;
+            }
           }
         }
       }

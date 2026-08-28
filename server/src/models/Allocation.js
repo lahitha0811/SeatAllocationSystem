@@ -41,11 +41,24 @@ const allocationSchema =
     examDate: {
       type: Date,
       required: true
+    },
+
+    allocationRunId: {
+      type: String,
+      required: true,
+      index: true
     }
 
   }, {
     timestamps: true
   });
+
+allocationSchema.index(
+  { examDate: 1, session: 1, roomNumber: 1, row: 1, col: 1 },
+  { unique: true }
+);
+
+allocationSchema.index({ examDate: 1, session: 1 });
 
 module.exports =
   mongoose.model(

@@ -10,6 +10,8 @@ const {
 
   getAllocations,
 
+  getAvailableExamDates,
+
   getRoomAllocations,
   getAnalytics
 
@@ -17,10 +19,15 @@ const {
   "./allocation.controller"
 );
 
+const authMiddleware = require("../../middleware/auth.middleware");
+const roleMiddleware = require("../../middleware/role.middleware");
+
 /* ---------------- RUN ALLOCATION ---------------- */
 
 router.post(
   "/run",
+  authMiddleware,
+  roleMiddleware("admin"),
   runAllocation
 );
 
@@ -34,6 +41,11 @@ router.get(
 router.get(
   "/analytics",
   getAnalytics
+);
+
+router.get(
+  "/exam-dates",
+  getAvailableExamDates
 );
 
 /* ---------------- ROOMWISE ---------------- */

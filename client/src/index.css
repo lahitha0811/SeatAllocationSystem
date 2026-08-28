@@ -30,20 +30,22 @@
 }
 
 .control-card {
-  background: white;
+  background: var(--bg-surface);
   padding: 20px;
   border-radius: 16px;
   margin-bottom: 25px;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  box-shadow: var(--shadow);
 }
 
 .control-card select,
 .control-card input {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
   border-radius: 10px;
   min-width: 180px;
 }
@@ -59,14 +61,14 @@
 }
 
 .stat-box {
-  background: white;
+  background: var(--bg-surface);
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  box-shadow: var(--shadow);
 }
 
 .stat-box h4 {
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-bottom: 10px;
 }
 
@@ -75,14 +77,14 @@
 }
 
 .legend-card {
-  background: white;
+  background: var(--bg-surface);
   padding: 18px;
   border-radius: 16px;
   margin-bottom: 30px;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  box-shadow: var(--shadow);
 }
 
 .legend-item {
@@ -98,10 +100,10 @@
 }
 
 .room-grid-wrapper {
-  background: white;
+  background: var(--bg-surface);
   padding: 25px;
   border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  box-shadow: var(--shadow);
   overflow-x: auto;
    max-width: 100%;
 }
@@ -142,11 +144,11 @@
 }
 
 .seat-empty {
-  background: #f3f4f6;
-  color: #6b7280;
-  border: 1px solid #d1d5db;
+  background: var(--row-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .seat-highlight {
-  border: 4px solid black !important;
+  border: 4px solid var(--text-primary) !important;
 }

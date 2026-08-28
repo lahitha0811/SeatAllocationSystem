@@ -75,13 +75,13 @@ function Approvals() {
 
       <div className="dashboard-main">
         <Navbar />
-    <div style={{ padding: "20px" }}>
+    <div className="reservations-page">
 
       <h2>
         Reservation Approvals
       </h2>
 
-      {requests.map(
+      {requests.length ? requests.map(
         (request) => (
 
           <div
@@ -128,7 +128,7 @@ function Approvals() {
 
           </div>
         )
-      )}
+      ) : <div className="approval-card">No pending reservation requests found.</div>}
       </div>
       </div>
     </div>

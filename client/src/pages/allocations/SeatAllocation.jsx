@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import API from "../../api/axios";
 
 import Sidebar from "../../components/layout/Sidebar";
@@ -10,16 +10,36 @@ import autoTable from "jspdf-autotable";
 
 function SeatAllocation() {
   const [session, setSession] = useState("FN");
-  const [limit, setLimit] = useState(150);
+  const [examDate, setExamDate] = useState("");
+  const [limit, setLimit] = useState("");
   const [allocations, setAllocations] = useState([]);
+  const [result, setResult] = useState(null);
+  const [availableDates, setAvailableDates] = useState([]);
+
+  useEffect(() => {
+    API.get("/allocations/exam-dates")
+      .then((res) => setAvailableDates(res.data.examDates || []))
+      .catch(() => setAvailableDates([]));
+  }, []);
 
   const generateAllocation = async () => {
+    if (!examDate) {
+      alert("Select an exam date before generating an allocation.");
+      return;
+    }
+
     try {
+      const selectedExam = availableDates.find((item) => item.examDate === examDate);
+      if (availableDates.length && (!selectedExam || !selectedExam.sessions.includes(session))) {
+        alert("No registered students were found for the selected exam date and session.");
+        return;
+      }
       const res = await API.post(
         "/allocations/run",
         {
           session,
-          limit
+          examDate,
+          ...(limit ? { limit: Number(limit) } : {})
         }
       );
 
@@ -28,8 +48,15 @@ function SeatAllocation() {
         res.data.data ||
         []
       );
+      setResult(res.data);
     } catch (error) {
       console.log(error);
+      const data = error.response?.data;
+      if (data?.allocations) {
+        setAllocations(data.allocations);
+        setResult(data);
+      }
+      alert(data?.message || "Unable to generate allocation.");
     }
   };
 
@@ -108,9 +135,7 @@ function SeatAllocation() {
         <Navbar />
 
         <div
-          style={{
-            padding: "30px"
-          }}
+          className="allocation-page"
         >
           <h2
             style={{
@@ -124,20 +149,34 @@ function SeatAllocation() {
 
           {/* Controls */}
 
-          <div
-            style={{
-              display: "flex",
-              gap: "25px",
-              alignItems: "center",
-              flexWrap: "wrap",
-              marginBottom: "25px",
-              background: "#fff",
-              padding: "20px",
-              borderRadius: "12px",
-              boxShadow:
-                "0 2px 10px rgba(0,0,0,0.08)"
-            }}
-          >
+          <div className="allocation-controls">
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "8px",
+                  fontWeight: "600"
+                }}
+              >
+                Exam Date
+              </label>
+
+              <input
+                type="date"
+                value={examDate}
+                onChange={(e) => setExamDate(e.target.value)}
+                list="available-exam-dates"
+                style={{
+                  padding: "10px 15px",
+                  borderRadius: "8px",
+                  border: "1px solid #d1d5db"
+                }}
+              />
+              <datalist id="available-exam-dates">
+                {availableDates.map(({ examDate: date }) => <option key={date} value={date} />)}
+              </datalist>
+            </div>
+
             <div>
               <label
                 style={{
@@ -192,12 +231,10 @@ function SeatAllocation() {
                 type="number"
                 value={limit}
                 onChange={(e) =>
-                  setLimit(
-                    Number(
-                      e.target.value
-                    )
-                  )
+                  setLimit(e.target.value)
                 }
+                min="1"
+                placeholder="All students"
                 style={{
                   padding:
                     "10px 15px",
@@ -302,19 +339,24 @@ function SeatAllocation() {
             {allocations.length}
           </div>
 
+          {result && (
+            <div
+              style={{
+                marginBottom: "20px",
+                padding: "12px 16px",
+                borderRadius: "8px",
+                background: result.complete ? "#dcfce7" : "#fef3c7"
+              }}
+            >
+              <strong>{result.complete ? "Complete allocation" : "Partial allocation"}</strong>
+              {" — "}{result.algorithm}; {result.violations || 0} constraint violations.
+              {!result.complete && ` ${result.unallocatedStudents?.length || 0} students could not be seated.`}
+            </div>
+          )}
+
           {/* Table */}
 
-          <div
-            style={{
-              background: "white",
-              borderRadius:
-                "12px",
-              overflow:
-                "hidden",
-              boxShadow:
-                "0 2px 12px rgba(0,0,0,0.08)"
-            }}
-          >
+          <div className="allocation-results">
             <table
               style={{
                 width: "100%",
@@ -358,10 +400,7 @@ function SeatAllocation() {
                       key={
                         allocation._id
                       }
-                      style={{
-                        borderBottom:
-                          "1px solid #e5e7eb"
-                      }}
+                      className="allocation-row"
                     >
                       <td
   style={{

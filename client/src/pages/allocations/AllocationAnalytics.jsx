@@ -109,7 +109,7 @@ const AllocationAnalytics =
 >
   <div
     style={{
-      background: "white",
+      background: "var(--bg-surface)",
       padding: "25px",
       borderRadius: "12px",
       boxShadow:
@@ -130,7 +130,7 @@ const AllocationAnalytics =
 
   <div
     style={{
-      background: "white",
+      background: "var(--bg-surface)",
       padding: "25px",
       borderRadius: "12px",
       boxShadow:
