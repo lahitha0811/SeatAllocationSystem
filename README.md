@@ -6,7 +6,7 @@ The system provides an admin dashboard for managing rooms, generating optimized 
 
 ## Live Demo
 
-[Smart Seat Allocation System](YOUR_VERCEL_URL)
+[Smart Seat Allocation System](https://seat-allocation-system-snowy.vercel.app/)
 
 ## Features
 
